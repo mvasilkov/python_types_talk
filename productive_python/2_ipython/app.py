@@ -3,7 +3,7 @@ from langchain.chat_models import ChatOpenAI
 from langchain.llms import VertexAI
 
 
-class EnrichBackend:
+class LMBackend:
     chain: LLMChain
 
     def request(self, text: str) -> str:
@@ -12,7 +12,7 @@ class EnrichBackend:
         return result
 
 
-class OpenAIBackend(EnrichBackend):
+class OpenAIBackend(LMBackend):
     def __init__(self):
         prompt_template = PromptTemplate(
             template='{text}',
@@ -24,7 +24,7 @@ class OpenAIBackend(EnrichBackend):
         self.chain = LLMChain(prompt=prompt_template, llm=llm)
 
 
-class PaLMBackend(EnrichBackend):
+class PaLMBackend(LMBackend):
     def __init__(self):
         prompt_template = PromptTemplate(
             template='{text}',
